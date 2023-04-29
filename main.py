@@ -136,12 +136,18 @@ def ipython_only(option):
     show_default=True,
     help='The data frequency of the simulation.',
 )
+@marketplace.command()
 @click.option(
-    '--capital-base',
-    type=float,
-    show_default=True,
-    help='The starting capital for the simulation.',
+    '--dataset',
+    default=None,
+    help='The name of the dataset to ingest from the Data Marketplace.',
 )
+@click.pass_context
+def get_withdraw_amount(ctx, dataset):
+    """Get withdraw amount owner is entitled to.
+    """
+    marketplace = Marketplace()
+    marketplace.get_withdraw_amount(dataset)
 @click.option(
     '-b',
     '--bundle',
